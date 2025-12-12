@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invítame un Guardapolvo</title>
+    <title>Doná un Guardapolvo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* --- ESTILOS (CSS) --- */
@@ -61,6 +61,15 @@
             color: var(--primary-color);
             margin-bottom: 10px;
             display: block;
+        }
+
+        .guardapolvo-select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
         }
 
         .counter-wrapper {
@@ -128,14 +137,19 @@
 <body>
 
     <div class="container">
-        <img src="https://via.placeholder.com/150" alt="Foto de perfil" class="profile-img">
+        <img src="image_0.png" alt="Logo Docentes Brown" class="profile-img">
         
-        <h1>Tu Nombre o Proyecto</h1>
-        <p class="tagline">Ayudame a seguir enseñando/curando/trabajando.</p>
+        <h1>Doná un Guardapolvo</h1>
+        <p class="tagline">Ayudemos a más chicos y chicas a iniciar las clases.</p>
 
         <div class="donation-box">
             <i class="fa-solid fa-user-doctor icon-guardapolvo"></i>
-            <p>Invítame un <strong>Guardapolvo</strong></p>
+            <p>Invítanos un <strong>Guardapolvo</strong></p>
+
+            <select id="guardapolvo-type" class="guardapolvo-select" onchange="render()">
+                <option value="18000">Primaria ($18,000)</option>
+                <option value="12000">Jardín ($12,000)</option>
+            </select>
 
             <div class="counter-wrapper">
                 <button class="btn-counter" onclick="updateCount(-1)">-</button>
@@ -144,7 +158,7 @@
             </div>
 
             <div class="price-display">
-                Total: $<span id="total">1000</span> ARS
+                Total: $<span id="total">18000</span> ARS
             </div>
 
             <button class="btn-pay" onclick="processPayment()">
@@ -160,10 +174,8 @@
     <script>
         /* --- LÓGICA (JavaScript) --- */
         
-        // CONFIGURACIÓN: Cambia esto por el precio de tu "unidad"
-        const PRICE_PER_UNIT = 1000; 
-        
         let count = 1;
+        let pricePerUnit = 18000; // Precio inicial por defecto
 
         function updateCount(change) {
             if (count + change >= 1) {
@@ -173,18 +185,22 @@
         }
 
         function render() {
-            const total = count * PRICE_PER_UNIT;
+            const selectElement = document.getElementById('guardapolvo-type');
+            pricePerUnit = parseInt(selectElement.value);
+            const total = count * pricePerUnit;
+            
             document.getElementById('count').innerText = count;
-            document.getElementById('total').innerText = total;
+            document.getElementById('total').innerText = total.toLocaleString();
             document.getElementById('btn-count').innerText = count;
         }
 
         function processPayment() {
-            const total = count * PRICE_PER_UNIT;
+            const total = count * pricePerUnit;
+            const selectElement = document.getElementById('guardapolvo-type');
+            const typeText = selectElement.options[selectElement.selectedIndex].text;
             
-            // AQUÍ ES DONDE SUCEDE LA MAGIA DE LA INTEGRACIÓN
             // Opción A: Redirigir a WhatsApp con el pedido
-            const message = `Hola! Quiero invitarte ${count} guardapolvo(s) por un total de $${total}. ¿Cómo te envío el dinero?`;
+            const message = `Hola! Quiero invitarte ${count} guardapolvo(s) de tipo ${typeText} por un total de $${total.toLocaleString()}. ¿Cómo te envío el dinero?`;
             const whatsappUrl = `https://wa.me/5491112345678?text=${encodeURIComponent(message)}`;
             
             // Opción B: Si tienes links de Mercado Pago configurados, podrías redirigir aquí.
