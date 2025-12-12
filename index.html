@@ -14,7 +14,10 @@
             --brand-blue: #24496e; 
             --brand-dark: #1a3654;
             
-            --bg-gradient: linear-gradient(135deg, #f3f4f6 0%, #dde4e8 100%);
+            /* FONDO CREMITA (Tono similar al del logo) */
+            --bg-cream: #f7f4eb; 
+            --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #f2efe4 100%);
+            
             --card-bg: #ffffff;
             --text-main: #2d3748;
             --text-light: #718096;
@@ -24,7 +27,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--bg-gradient);
+            background: var(--bg-gradient); /* Usamos el gradiente crema */
             color: var(--text-main);
             margin: 0;
             display: flex;
@@ -40,13 +43,15 @@
             max-width: 420px;
             padding: 2.5rem 2rem;
             border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(36, 73, 110, 0.15); /* Sombra con tinte azulado */
+            /* Sombra azulada suave para integrar con el fondo */
+            box-shadow: 0 20px 40px rgba(36, 73, 110, 0.10); 
             text-align: center;
             position: relative;
             overflow: hidden;
+            border: 1px solid #efeadd; /* Borde sutil */
         }
 
-        /* Barra decorativa superior con tu color */
+        /* Barra decorativa superior con tu azul */
         .container::before {
             content: '';
             position: absolute;
@@ -69,14 +74,14 @@
             object-fit: cover;
             border: 4px solid white;
             box-shadow: 0 8px 20px rgba(36, 73, 110, 0.2);
-            background-color: white;
+            background-color: white; /* Por si el png tiene transparencia */
         }
 
         h1 { 
             font-size: 1.6rem; 
             margin: 0.5rem 0; 
             font-weight: 700; 
-            color: var(--brand-blue); /* Título en tu azul */
+            color: var(--brand-blue); 
             letter-spacing: -0.5px;
             text-transform: uppercase;
         }
@@ -229,7 +234,7 @@
         .footer {
             margin-top: 2.5rem;
             font-size: 0.85rem;
-            color: #a0aec0;
+            color: #929aab; /* Gris azulado suave */
         }
         
         /* --- MODAL (Ventana Emergente) --- */
@@ -237,8 +242,9 @@
             display: none; 
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(36, 73, 110, 0.7); /* Fondo oscuro azulado */
-            backdrop-filter: blur(5px);
+            /* Fondo oscuro azulado para mantener branding */
+            background: rgba(36, 73, 110, 0.75); 
+            backdrop-filter: blur(4px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -254,7 +260,7 @@
             text-align: center;
             animation: slideUp 0.3s ease-out;
             position: relative;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
         }
 
         @keyframes slideUp {
@@ -414,7 +420,7 @@
         let currentTotal = 18000;
         const ALIAS = "DOCENTES.BROWN";
         
-        // Número de WhatsApp (REVISA QUE ESTÉ BIEN)
+        // Número de WhatsApp
         const PHONE_NUMBER = "5491153196358";
 
         function updateCount(change) {
@@ -452,10 +458,10 @@
             navigator.clipboard.writeText(ALIAS).then(() => {
                 const msg = document.getElementById('copyMsg');
                 msg.innerHTML = '<i class="fa-solid fa-check"></i> ¡Copiado!';
-                msg.style.color = "#25D366"; // Verde confirmación
+                msg.style.color = "#25D366";
                 setTimeout(() => {
                     msg.innerHTML = '<i class="fa-regular fa-copy"></i> Copiar Alias';
-                    msg.style.color = ""; // Volver al color original
+                    msg.style.color = "";
                 }, 2000);
             });
         }
