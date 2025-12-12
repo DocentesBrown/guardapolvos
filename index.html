@@ -1,16 +1,3 @@
-¡Excelente enfoque\! Es mucho más práctico para el usuario tener los datos de transferencia a mano **antes** de ir a WhatsApp. Así, el mensaje de WhatsApp se convierte en un "comprobante" o aviso de pago, lo cual organiza mejor tu administración.
-
-**Sobre tu pedido:**
-
-1.  **Estética mejorada:** He modernizado el diseño con sombras más suaves, un fondo con degradado sutil para darle profundidad, y controles (botones y selectores) más elegantes y grandes (mejor tacto en celulares).
-2.  **Flujo con Alias:** He programado una **ventana emergente (Modal)**.
-      * Cuando tocan "Aportar", **no** va a WhatsApp todavía.
-      * Se abre una ventana con el Alias `DOCENTES.BROWN` y un botón para copiarlo.
-      * Abajo hay un botón que dice "Ya transferí, avisar por WhatsApp". Ese es el que finalmente abre el chat.
-
-Aquí tienes el código completo. Reemplaza todo el contenido de tu archivo por esto:
-
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -498,12 +485,3 @@ Aquí tienes el código completo. Reemplaza todo el contenido de tu archivo por 
     </script>
 </body>
 </html>
-```
-
-### Funcionalidades Clave Nuevas:
-
-1.  **Copia el Alias con un clic:** En la pantalla que se abre, si tocan el recuadro que dice `DOCENTES.BROWN`, se copia automáticamente al portapapeles del celular. Aparece un mensajito de "¡Copiado\!".
-2.  **Recordatorio del Monto:** En esa misma pantalla les recuerda: *"Monto exacto a transferir: $18.000"*.
-3.  **Botón final:** El botón verde "Ya transferí, avisar" genera un mensaje de WhatsApp que dice: *"Ya realicé la transferencia de $X al alias DOCENTES.BROWN... Adjunto comprobante"*.
-
-¡Pruébalo y dime si la estética te convence más\!
