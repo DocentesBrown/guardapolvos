@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invítame un Guardapolvo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- ESTILOS (CSS) --- */
+        :root {
+            --primary-color: #4A90E2; /* Azul tipo guardapolvo */
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* Perfil */
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .tagline { color: #666; margin-bottom: 2rem; font-size: 0.9rem; }
+
+        /* Sección de Donación */
+        .donation-box {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid #eee;
+        }
+
+        .icon-guardapolvo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .counter-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 1.5rem 0;
+        }
+
+        .btn-counter {
+            background: #e0e0e0;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-counter:hover { background: #d0d0d0; }
+
+        .count-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            min-width: 40px;
+        }
+
+        .price-display {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Botón de Pago */
+        .btn-pay {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-pay:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://via.placeholder.com/150" alt="Foto de perfil" class="profile-img">
+        
+        <h1>Tu Nombre o Proyecto</h1>
+        <p class="tagline">Ayudame a seguir enseñando/curando/trabajando.</p>
+
+        <div class="donation-box">
+            <i class="fa-solid fa-user-doctor icon-guardapolvo"></i>
+            <p>Invítame un <strong>Guardapolvo</strong></p>
+
+            <div class="counter-wrapper">
+                <button class="btn-counter" onclick="updateCount(-1)">-</button>
+                <span class="count-display" id="count">1</span>
+                <button class="btn-counter" onclick="updateCount(1)">+</button>
+            </div>
+
+            <div class="price-display">
+                Total: $<span id="total">1000</span> ARS
+            </div>
+
+            <button class="btn-pay" onclick="processPayment()">
+                Invitar <span id="btn-count">1</span> Guardapolvo
+            </button>
+        </div>
+
+        <div class="footer">
+            Hecho con ❤️ para la comunidad
+        </div>
+    </div>
+
+    <script>
+        /* --- LÓGICA (JavaScript) --- */
+        
+        // CONFIGURACIÓN: Cambia esto por el precio de tu "unidad"
+        const PRICE_PER_UNIT = 1000; 
+        
+        let count = 1;
+
+        function updateCount(change) {
+            if (count + change >= 1) {
+                count += change;
+                render();
+            }
+        }
+
+        function render() {
+            const total = count * PRICE_PER_UNIT;
+            document.getElementById('count').innerText = count;
+            document.getElementById('total').innerText = total;
+            document.getElementById('btn-count').innerText = count;
+        }
+
+        function processPayment() {
+            const total = count * PRICE_PER_UNIT;
+            
+            // AQUÍ ES DONDE SUCEDE LA MAGIA DE LA INTEGRACIÓN
+            // Opción A: Redirigir a WhatsApp con el pedido
+            const message = `Hola! Quiero invitarte ${count} guardapolvo(s) por un total de $${total}. ¿Cómo te envío el dinero?`;
+            const whatsappUrl = `https://wa.me/5491112345678?text=${encodeURIComponent(message)}`;
+            
+            // Opción B: Si tienes links de Mercado Pago configurados, podrías redirigir aquí.
+            
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Inicializar
+        render();
+    </script>
+</body>
+</html>
