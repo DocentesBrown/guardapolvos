@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doná un Guardapolvo</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- ESTILOS (CSS) --- */
         :root {
-            --primary-color: #4A90E2; /* Azul tipo guardapolvo */
+            --primary-color: #4A90E2; /* Azul Docentes Brown */
             --bg-color: #f4f7f6;
             --text-color: #333;
             --card-bg: #ffffff;
@@ -35,18 +35,19 @@
             text-align: center;
         }
 
-        /* Perfil */
+        /* Perfil / Logo */
         .profile-img {
-            width: 100px;
-            height: 100px;
+            width: 120px; /* Un poco más grande para que se luzca el logo */
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--primary-color);
             margin-bottom: 1rem;
+            background-color: white; /* Fondo blanco por si la img tiene transparencia */
         }
 
-        h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .tagline { color: #666; margin-bottom: 2rem; font-size: 0.9rem; }
+        h1 { font-size: 1.5rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;}
+        .tagline { color: #666; margin-bottom: 2rem; font-size: 0.9rem; line-height: 1.4; }
 
         /* Sección de Donación */
         .donation-box {
@@ -57,19 +58,25 @@
         }
 
         .icon-guardapolvo {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: block;
         }
 
         .guardapolvo-select {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 1rem;
+            outline: none;
+            background-color: white;
+        }
+        
+        .guardapolvo-select:focus {
+            border-color: var(--primary-color);
         }
 
         .counter-wrapper {
@@ -89,6 +96,7 @@
             font-size: 1.2rem;
             cursor: pointer;
             transition: 0.2s;
+            color: #555;
         }
 
         .btn-counter:hover { background: #d0d0d0; }
@@ -101,9 +109,10 @@
         }
 
         .price-display {
-            font-size: 1.1rem;
-            color: #555;
+            font-size: 1.2rem;
+            color: #444;
             margin-bottom: 1.5rem;
+            font-weight: 500;
         }
 
         /* Botón de Pago */
@@ -113,18 +122,19 @@
             border: none;
             padding: 15px 30px;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
             transition: transform 0.2s, box-shadow 0.2s;
             text-decoration: none;
             display: inline-block;
+            box-shadow: 0 4px 6px rgba(74, 144, 226, 0.3);
         }
 
         .btn-pay:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+            box-shadow: 0 6px 15px rgba(74, 144, 226, 0.5);
         }
 
         .footer {
@@ -137,18 +147,19 @@
 <body>
 
     <div class="container">
-        <img src="image_0.png" alt="Logo Docentes Brown" class="profile-img">
+        <img src="Gemini_Generated_Image_ny9pzpny9pzpny9p.jpg" alt="Logo Docentes Brown" class="profile-img">
         
-        <h1>Doná un Guardapolvo</h1>
-        <p class="tagline">Ayudemos a más chicos y chicas a iniciar las clases.</p>
+        <h1>Docentes Brown</h1>
+        <p class="tagline">Doná un Guardapolvo,<br>ayudemos a más chicos y chicas a iniciar las clases.</p>
 
         <div class="donation-box">
-            <i class="fa-solid fa-user-doctor icon-guardapolvo"></i>
-            <p>Invítanos un <strong>Guardapolvo</strong></p>
+            <i class="fa-solid fa-shirt icon-guardapolvo"></i>
+            
+            <p><strong>Aportá un Guardapolvo</strong></p>
 
             <select id="guardapolvo-type" class="guardapolvo-select" onchange="render()">
-                <option value="18000">Primaria ($18,000)</option>
-                <option value="12000">Jardín ($12,000)</option>
+                <option value="18000">Primaria ($18.000)</option>
+                <option value="12000">Jardín ($12.000)</option>
             </select>
 
             <div class="counter-wrapper">
@@ -158,16 +169,16 @@
             </div>
 
             <div class="price-display">
-                Total: $<span id="total">18000</span> ARS
+                Total: $<span id="total">18.000</span>
             </div>
 
             <button class="btn-pay" onclick="processPayment()">
-                Invitar <span id="btn-count">1</span> Guardapolvo
+                Aportá <span id="btn-count">1</span> Guardapolvo
             </button>
         </div>
 
         <div class="footer">
-            Hecho con ❤️ para la comunidad
+            Hecho con ❤️ por Docentes Brown
         </div>
     </div>
 
@@ -175,7 +186,7 @@
         /* --- LÓGICA (JavaScript) --- */
         
         let count = 1;
-        let pricePerUnit = 18000; // Precio inicial por defecto
+        let pricePerUnit = 18000;
 
         function updateCount(change) {
             if (count + change >= 1) {
@@ -184,14 +195,21 @@
             }
         }
 
+        function formatMoney(amount) {
+            return amount.toLocaleString('es-AR');
+        }
+
         function render() {
             const selectElement = document.getElementById('guardapolvo-type');
             pricePerUnit = parseInt(selectElement.value);
             const total = count * pricePerUnit;
             
             document.getElementById('count').innerText = count;
-            document.getElementById('total').innerText = total.toLocaleString();
-            document.getElementById('btn-count').innerText = count;
+            document.getElementById('total').innerText = formatMoney(total);
+            
+            // Texto dinámico del botón (singular/plural)
+            const textGuardapolvo = count === 1 ? 'Guardapolvo' : 'Guardapolvos';
+            document.getElementById('btn-count').innerText = `${count} ${textGuardapolvo}`;
         }
 
         function processPayment() {
@@ -199,11 +217,11 @@
             const selectElement = document.getElementById('guardapolvo-type');
             const typeText = selectElement.options[selectElement.selectedIndex].text;
             
-            // Opción A: Redirigir a WhatsApp con el pedido
-            const message = `Hola! Quiero invitarte ${count} guardapolvo(s) de tipo ${typeText} por un total de $${total.toLocaleString()}. ¿Cómo te envío el dinero?`;
-            const whatsappUrl = `https://wa.me/5491112345678?text=${encodeURIComponent(message)}`;
+            // Mensaje para WhatsApp
+            const message = `Hola Docentes Brown! Quiero aportar ${count} guardapolvo(s) (${typeText}) por un total de $${formatMoney(total)}. ¿Me pasan los datos para transferir?`;
             
-            // Opción B: Si tienes links de Mercado Pago configurados, podrías redirigir aquí.
+            // Reemplaza este número por el tuyo real
+            const whatsappUrl = `https://wa.me/5491112345678?text=${encodeURIComponent(message)}`;
             
             window.open(whatsappUrl, '_blank');
         }
